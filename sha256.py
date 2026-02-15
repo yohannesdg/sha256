@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+#Created on Mon Apr  7 13:53:41 2025 , @author: JakobianMatrix 
+inflow = open("DataBin01.txt",'r')
+X3 = list(map(int,inflow.readline().strip() ))
+X2 = list(map(int,inflow.readline().strip() ))
+X4 = list(map(int,inflow.readline().strip() ))
+X1 = list(map(int,inflow.readline().strip() ))
+for j in range(0, 2047):
+    A =X1[j                      + 32*16]*(j%32 > 0)
+    B =X1[j                      + 32*0 ]
+    C =X1[j                      + 32*9 ]
+    D =X1[32*(j//32) + (j+ 3)%32 + 32*1 ]*(j%32 < 29)
+    E =X1[32*(j//32) + (j+ 7)%32 + 32*1 ]
+    F =X1[32*(j//32) + (j+18)%32 + 32*1 ]
+    G =X1[32*(j//32) + (j+10)%32 + 32*14]*(j%32 < 22)
+    H =X1[32*(j//32) + (j+17)%32 + 32*14]
+    I =X1[32*(j//32) + (j+19)%32 + 32*14]
+    J =X2[j                      + 32*4 ]*(j%32 > 0)
+    K =X2[j                      + 32*0 ]
+    L =X2[32*(j//32) + (j+ 6)%32 + 32*3 ]
+    M =X2[32*(j//32) + (j+11)%32 + 32*3 ]
+    N =X2[32*(j//32) + (j+25)%32 + 32*3 ]
+    O =X2[j                      + 32*3 ]
+    P =X2[j                      + 32*2 ]
+    Q =X2[j                      + 32*1 ]
+    R =X3[j                      + 32*4 ]*(j%32 > 0)
+    S =X3[j                      + 32*0 ]
+    T =X3[32*(j//32) + (j+2)%32  + 32*3 ]
+    U =X3[32*(j//32) + (j+13)%32 + 32*3 ]
+    V =X3[32*(j//32) + (j+22)%32 + 32*3 ]
+    W =X3[j                      + 32*3 ]
+    X =X3[j                      + 32*2 ]
+    Y =X3[j                      + 32*1 ]
+    Z =X4[j                      + 32*0 ]
+    AA = A+B+C     + (D+E+F)%2  + (G+H+I)%2
+    BB = J+K+Q+S+Z + (L+M+N)%2  + AA%2 + O*P - O*Q 
+    CC = BB+R-S-J  + (T+U+V)%2  + W*X+X*Y+Y*W- 2*W*X*Y
+    X1[-1]= AA%2 ; X1.append(AA//2)
+    X2[-1]= BB%2 ; X2.append(BB//2)
+    X3[-1]= CC%2 ; X3.append(CC//2)
